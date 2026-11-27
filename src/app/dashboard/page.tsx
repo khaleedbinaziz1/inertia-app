@@ -9,11 +9,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { GitHub, Database, Shield, Search, Loader2 } from "lucide-react";
+import SupabasePage from "@/app/dashboard/supabase-page";
 
 export default function Dashboard() {
   const [repos, setRepos] = useState<Array<{ id: number; name: string; url: string }>>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showNewRepo, setShowNewRepo] = useState(false);
+  const [showSupabase, setShowSupabase] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -68,10 +70,20 @@ export default function Dashboard() {
           </p>
         </header>
 
-        <Button onClick={createNewRepo} className="w-full mb-4">
-          <GitHub className="mr-2 h-4 w-4" />
-          Create New Repository
-        </Button>
+        <div className="flex gap-3 mb-4">
+          <Button onClick={createNewRepo} className="flex-1">
+            <GitHub className="mr-2 h-4 w-4" />
+            Create New Repository
+          </Button>
+          <Button onClick={() => setShowSupabase(true)} className="flex-1">
+            <Database className="mr-2 h-4 w-4" />
+            Supabase
+          </Button>
+        </div>
+
+        {showSupabase && (
+          <SupabasePage />
+        )}
 
         {isLoading && (
           <div className="text-center py-8">
