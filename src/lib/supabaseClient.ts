@@ -1,5 +1,6 @@
 "use client";
 
+// Supabase client - @supabase/ssr is a peer dependency, add to package.json manually
 import { createClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
